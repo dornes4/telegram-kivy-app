@@ -11,15 +11,18 @@ source.include_exts = py,png,jpg,kv,atlas,json
 version = 1.0.0
 orientation = portrait
 fullscreen = 1
+
 android.permissions = INTERNET
 
-# ✅ Указаны рабочие версии для сборки
+# ✅ Совместимо с Build Tools 30.0.3
 android.api = 33
 android.ndk = 25b
 android.minapi = 21
 android.build_tools_version = 30.0.3
 
+# ✅ Учитывает реальную структуру твоей папки сборки
 android.archs = armeabi-v7a, arm64-v8a
+
 android.enable_androidx = 1
 android.use_android_support = 0
 android.copy_libs = 1
