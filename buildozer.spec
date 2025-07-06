@@ -11,10 +11,9 @@ source.include_exts = py,png,jpg,kv,atlas,json
 version = 1.0.0
 orientation = portrait
 fullscreen = 1
-
 android.permissions = INTERNET
 
-# ✅ Актуальные параметры сборки
+# ✅ Указаны рабочие версии для сборки
 android.api = 33
 android.ndk = 25b
 android.minapi = 21
@@ -28,7 +27,6 @@ android.copy_libs = 1
 requirements = python3,kivy
 
 entrypoint = main.py
-
 icon.filename = %(source.dir)s/icon.png
 presplash.filename = %(source.dir)s/presplash.png
 
