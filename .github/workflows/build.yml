@@ -1,40 +1,35 @@
-name: Build APK
+[app]
 
-on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
+title = TelegramParser
+package.name = telegramparser
+package.domain = org.dornes4
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+source.dir = .
+source.main = main.py
+source.include_exts = py,png,jpg,kv,atlas,json
 
-    steps:
-    - name: 📥 Клонировать репозиторий
-      uses: actions/checkout@v3
+version = 1.0.0
+orientation = portrait
+fullscreen = 1
 
-    - name: 🐍 Установить Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
+android.permissions = INTERNET
 
-    - name: 🧰 Установить зависимости
-      run: |
-        sudo apt update
-        sudo apt install -y zip unzip openjdk-17-jdk autoconf automake libtool pkg-config
-        pip install --upgrade pip
-        pip install buildozer cython==0.29.36
+# ✅ Актуальные параметры сборки
+android.api = 33
+android.ndk = 25b
+android.minapi = 21
+android.build_tools_version = 30.0.3
 
-    - name: ✅ Принять лицензии и установить Build Tools
-      run: |
-        yes | $HOME/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses || true
-        $HOME/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin/sdkmanager "build-tools;30.0.3"
+android.archs = armeabi-v7a, arm64-v8a
+android.enable_androidx = 1
+android.use_android_support = 0
+android.copy_libs = 1
 
-    - name: ⚙️ Сборка APK
-      run: buildozer android debug
+requirements = python3,kivy
 
-    - name: 📦 Сохранить APK как артефакт
-      uses: actions/upload-artifact@v4
-      with:
-        name: telegramparser-debug-apk
-        path: bin/*.apk
+entrypoint = main.py
+
+icon.filename = %(source.dir)s/icon.png
+presplash.filename = %(source.dir)s/presplash.png
+
+log_enable = 1
