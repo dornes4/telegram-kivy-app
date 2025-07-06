@@ -13,6 +13,9 @@ jobs:
     - name: 📥 Клонировать репозиторий
       uses: actions/checkout@v3
 
+    - name: 📦 Установить Android SDK и принять лицензии
+      uses: android-actions/setup-android@v2
+
     - name: 🐍 Установить Python
       uses: actions/setup-python@v4
       with:
