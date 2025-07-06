@@ -1,0 +1,36 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Клонировать репозиторий
+      uses: actions/checkout@v3
+
+    - name: 🐍 Установить Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: 🧰 Установить зависимости
+      run: |
+        sudo apt update
+        sudo apt install -y zip unzip openjdk-17-jdk autoconf automake libtool pkg-config
+        pip install --upgrade pip
+        pip install buildozer cython==0.29.36
+
+    - name: ⚙️ Инициализировать Buildozer и собрать APK
+      run: |
+        buildozer android debug
+
+    - name: 📦 Сохранить APK как артефакт
+      uses: actions/upload-artifact@v3
+      with:
+        name: telegramparser-debug-apk
+        path: bin/*.apk
